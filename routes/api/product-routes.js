@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { Product, Category, Tag, ProductTag } = require('../../models');
-
+// focus on the get 1 and get all and the delete one (9/9/23)
 // The `/api/products` endpoint
 
 // get all products
