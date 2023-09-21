@@ -45,12 +45,34 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:catergory_id', async (req, res) => {
   // update a category by its `id` value
+  const updatedcatergoryData = await catergoryData.update(
+   { product: req.body.product,
+    category: req.body.category,
+    tag: req.body.tag,
+    productTag: req.body.productTag,
+   },
+  );
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
   // delete a category by its `id` value
+  try {
+    const Category = await catergoryData.destroy({
+      where: {
+        id: req.params.id,
+      },
+    });
+    if (!categoryDataData) {
+      res.status(404).json({ message: 'No category found with that id!' });
+      return;
+    }
+
+    res.status(200).json(libraryCardData);
+  } catch (err) {
+    
+  }
 });
 
 module.exports = router;
