@@ -88,11 +88,12 @@ router.put('/:id', async (req, res) => {
     })
     .catch((err) => {
       // console.log(err);
+      console.error
       res.status(400).json(err);
     });
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:category_id', (req, res) => {
   // delete one product by its `id` value
 });
 
