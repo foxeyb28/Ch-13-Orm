@@ -10,26 +10,27 @@ ProductTag.init(
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-      autoIncrement: true
+      autoIncrement: true,
+      allowNull: false,
     },
-  product_name: {
-    type: DataTypes.STRING,
-    allowNull: false,
+    producy_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'product',
+        key: 'id',
       },
-    price: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    stock: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    category_id: {
-      type: DataTypes.STRING,
-      allowNull: false,
+                   
+      tag_id: {
+        type: DataTypes.INTEGER,
+        references: {
+          model: 'tag',
+          key: 'id',
+        },
     },
   },
-  {
+  },
+        
+    {
     sequelize,
     timestamps: false,
     freezeTableName: true,

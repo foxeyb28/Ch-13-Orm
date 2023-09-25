@@ -16,24 +16,7 @@ Tag.init(
     type: DataTypes.STRING,
     allowNull: false,
       },
-    producttag: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
     
-    product_id: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    
-    tag_id: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'tag',
-        key: 'id',
-      },
-  },
-},
   {
     sequelize,
     timestamps: false,
