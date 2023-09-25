@@ -1,5 +1,5 @@
 // import important parts of sequelize library
-const { UUID4, Model, DataTypes } = require("sequelize");
+const { Model, DataTypes } = require("sequelize");
 // import our database connection from config.js
 const sequelize = require("../config/connection");
 
@@ -17,13 +17,10 @@ Product.init(
     allowNull: false,
   },
   product_name: {
-    type: DataTypes.UUID,
-    defaultValue: UUID4,
+    type: DataTypes. STRING,
+    allowNull: false
   },
-  is_donor: {
-    type: DataTypes.STRING,
-    defaultValue: true,
-  },
+  
   product_id: {
     type: DataTypes.INTEGER,
     references: {
@@ -32,11 +29,12 @@ Product.init(
     },
   },
   price: {
-    type: DataTypes.DECIMAL(200.0),
+    type: DataTypes.DECIMAL(10, 2),
     allowNull: false,
     validate: {
       isDecimal: true,
   },
+},
   stock: {
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -55,7 +53,7 @@ Product.init(
   },
 },
 
-
+{
   sequelize,
   timestamps: false,
   freezeTableName: true,

@@ -12,11 +12,12 @@ router.get('/', async (req, res) => {
   });
   res.status(200).json(TagData);
 } catch (err) {
+  console.log(err);
   res.status(500).json(err);
 }
 });
 
-router.get('/:id', async (req, res) => {
+router.get('/', async (req, res) => {
   // find a single tag by its `id`
   // be sure to include its associated Product data
   try {
@@ -47,7 +48,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.put('/:id', async (req, res) => {
+router.put('/', async (req, res) => {
   // update a tag's name by its `id` value
   try {
     const TagData = await Tag.update(req.body, {
@@ -66,7 +67,7 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/', async (req, res) => {
   // delete on tag by its `id` value
   try {
     const TagData = await Tag.destroy({
