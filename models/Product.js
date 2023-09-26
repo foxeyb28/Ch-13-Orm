@@ -21,14 +21,7 @@ Product.init(
     allowNull: false
   },
   
-  product_id: {
-    type: DataTypes.INTEGER,
-    references: {
-      model: "product",
-      key: "id",
-    },
-  },
-  price: {
+    price: {
     type: DataTypes.DECIMAL(10, 2),
     allowNull: false,
     validate: {
