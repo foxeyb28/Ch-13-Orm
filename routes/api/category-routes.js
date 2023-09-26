@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { json } = require('sequelize');
-const { Category } = require('../../models');
+const { Category, Product } = require('../../models');
 // do all of these 9/9/23
 // The `/api/categories` endpoint
 
@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
   // be sure to include its associated Products
   try {
     const categoryData = await Category.findAll({
-      include: [{model: Category}],
+      
   });
     res.status(200).json(categoryData);
   } catch (err) {
@@ -18,12 +18,12 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/', async (req, res) => {
+router.get('/:id', async (req, res) => {
   // find one category by its `id` value
   // be sure to include its associated Products
 try {
   const catergoryData = await catergoryData.findByPk(req.params.id, {
-    include: [{ model : Category}],
+    
   });
   if (catergoryData) {
     res.status(404).json({ message: 'no product found with that id!'});
@@ -47,7 +47,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.put('/:catergory_id', async (req, res) => {
+router.put('/:id', async (req, res) => {
   // update a category by its `id` value
   try {
     const catergoryData = await catergoryData.update(req.body, {
@@ -66,7 +66,7 @@ where: {
 });
 
 
-router.delete('/:category_id', async (req, res) => {
+router.delete('/:id', async (req, res) => {
   // delete a category by its `id` value
   
      Category.destroy({
