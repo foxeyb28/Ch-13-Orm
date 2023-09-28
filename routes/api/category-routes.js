@@ -37,14 +37,15 @@ try {
 
 router.post('/', async (req, res) => {
   // create a new category
-  try {
-    const BasketballData = await catergoryData.create(req.body);
-    res.status(200).json(catergoryData);
-      
-    }
-    catch (err) { 
-    res.status(400),json(err);
-  }
+  console.log(err);
+  Category.create(req, res)     
+    .then((newCategory) => {
+      // Send the newly created row as a JSON object
+      res.json(newCategory);
+    })
+    .catch((err) => {
+      res.json(err);
+    });
 });
 
 router.put('/:id', async (req, res) => {

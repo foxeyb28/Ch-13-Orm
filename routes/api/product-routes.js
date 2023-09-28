@@ -48,32 +48,29 @@ router.post('/', async (req, res) => {
       tagIds: [1, 2, 3, 4]
     },
   ])
+  .then((product) => {
+    // if there's product tags, we need to create pairings to bulk create in the ProductTag model
+    if (req.body.tagIds.length) {
+      const productTagArr = req.body.tagIds.map((tag_id) => {
+        return {
+          product_id: product.id,
+          tag_id,
+        };
+      });
+      return Product.bulkCreate(productTagIdArr);
+    }
+    // if no product tags, just respond
+    res.status(200).json(product);
+  })
+  .then((ProductTagIds) => res.status(200).json(ProductTagIds))
+  .catch((err) => {
+    console.log(err);
+    res.status(400).json(err);
+  });
   },
 ),
 
-  Product.create(req.body)
-    .then((product) => {
-      // if there's product tags, we need to create pairings to bulk create in the ProductTag model
-      if (req.body.tagIds.length) {
-        const productTagArr = req.body.tagIds.map((tag_id) => {
-          return {
-            product_id: product.id,
-            tag_id,
-          };
-        });
-        return Product.bulkCreate(productTagIdArr);
-      }
-      // if no product tags, just respond
-      res.status(200).json(product);
-    })
-    .then((ProductTagIds) => res.status(200).json(ProductTagIds))
-    .catch((err) => {
-      console.log(err);
-      res.status(400).json(err);
-    });
-
-
-// update product
+  // update product
 router.put('/:id', async (req, res) => {
   // update product data
   Product.update(req.body, {
@@ -86,7 +83,7 @@ router.put('/:id', async (req, res) => {
         
         ProductTag.findAll({
           where: { product_id: req.params.id }
-        }).then((productTag) => {
+        }).then((productTags) => {
           // create filtered list of new tag_ids
           const productTagIds = productTags.map(({ tag_id }) => tag_id);
           const newProductTags = req.body.tagIds
@@ -105,8 +102,8 @@ router.put('/:id', async (req, res) => {
                   .filter(({ tag_id }) => !req.body.tagIds.includes(tag_id))
                   .map(({ id }) => id);
           return Promise.all([
-            Product.destroy({ where: { id: ProductToRemove } }),
-            Product.bulkCreate(newProductTags),
+            ProductTag.destroy({ where: { id: ProductTagsToRemove } }),
+            ProductTag.bulkCreate(newProductTags),
           ]);
         });
       }
