@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const { json } = require('sequelize');
 const { Category, Product } = require('../../models');
 // do all of these 9/9/23
 // The `/api/categories` endpoint
@@ -57,7 +56,7 @@ router.put('/:id', async (req, res) => {
         id: req.params.id,
       },
     });
-    if (!categoryData[0]) {
+    if (!categoryData) {
       res.status(404).json({ message: 'No category with this id!' });
       return;
     }
