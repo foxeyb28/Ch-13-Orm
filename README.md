@@ -12,4 +12,4 @@ I colabed with some advisers working on this project: Bobbi, Emma, Jacob and Cha
 Their insight was key to clearing up some of the errors I experienced ie; structure setup, syntax, test not passing and grammar.
 Tech used to create the back end was Mysql and Sequelize.
 
-
+https://watch.screencastify.com/v/nJTd7sumNzd0rdNk2HNk
