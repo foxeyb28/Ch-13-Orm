@@ -101,11 +101,11 @@ router.put('/:id', async (req, res) => {
             // figure out which ones to remove
                   // run both actions
                   // run both actions
-                  const productTagsToRemove = productTags
-                  .filter(({ tag_id }) => !req.body.tagIds.includes(tag_id))
-                  .map(({ id }) => id);
+                  // const productTagsToRemove = productTags
+                  // .filter(({ tag_id }) => !req.body.tagIds.includes(tag_id))
+                  // .map(({ id }) => id);
           return Promise.all([
-            ProductTag.destroy({ where: { id: ProductTagsToRemove } }),
+           // ProductTag.destroy({ where: { id: productTagsToRemove } }),
             ProductTag.bulkCreate(newProductTags),
           ]);
         });
